@@ -21,4 +21,5 @@ spring:
   graphql:
     graphiql:
       enabled: true
-    path: /graphql
+    http:
+      path: /graphql

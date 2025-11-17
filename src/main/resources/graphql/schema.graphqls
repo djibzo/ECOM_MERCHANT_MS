@@ -5,12 +5,14 @@ type User {
     phone: String
     phone_verified: Boolean
     updated_at: String
+    nin: String
 }
 
 input UserInput {
     firstName: String!
     lastName: String!
     phone: String!
+    nin: String!
 }
 
 type Query {

@@ -25,8 +25,9 @@ public class UserMutationResolver {
         u.setPhone(input.phone());
         u.setPhone_verified(false);
         u.setUpdated_at(LocalDateTime.now());
+        u.setNin(input.nin);
         return repo.save(u);
     }
 
-    public record UserInput(String firstName, String lastName, String phone) {}
+    public record UserInput(String firstName, String lastName, String phone,String nin) {}
 }
