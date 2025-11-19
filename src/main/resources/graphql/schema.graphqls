@@ -22,3 +22,4 @@ type Query {
 type Mutation {
     createUser(input: UserInput!): User
 }
+

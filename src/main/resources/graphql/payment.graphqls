@@ -1,0 +1,78 @@
+# Schéma GraphQL pour les paiements
+# Auteur: Groupe 4
+
+# Type représentant un paiement
+type Payment {
+    id: ID!
+    paymentCode: String!
+    customerId: ID!
+    amount: Float!
+    currency: String!
+    status: PaymentStatus!
+    paymentMethod: PaymentMethod!
+    transactionReference: String
+    description: String
+    createdAt: String!
+    paidAt: String
+    phoneNumber: String
+    cardLastFourDigits: String
+}
+
+# Énumération des statuts de paiement
+enum PaymentStatus {
+    PENDING
+    PROCESSING
+    COMPLETED
+    FAILED
+    CANCELLED
+    REFUNDED
+}
+
+# Énumération des méthodes de paiement
+enum PaymentMethod {
+    WAVE
+    ORANGE_MONEY
+    FREE_MONEY
+    CARD
+    CASH
+    BANK_TRANSFER
+}
+
+# Input pour créer un paiement
+input PaymentInput {
+    customerId: ID!
+    amount: Float!
+    paymentMethod: PaymentMethod!
+    phoneNumber: String
+    description: String
+}
+
+# Input pour traiter un paiement
+input PaymentProcessInput {
+    paymentCode: String!
+    verificationCode: String!
+}
+
+# Requêtes disponibles (Query)
+type Query {
+    # Obtenir un paiement par code
+    getPayment(paymentCode: String!): Payment
+    
+    # Obtenir les paiements d'un client
+    getCustomerPayments(customerId: ID!): [Payment!]!
+    
+    # Obtenir tous les paiements
+    getAllPayments: [Payment!]!
+}
+
+# Mutations disponibles (Mutation)
+type Mutation {
+    # Créer un nouveau paiement
+    createPayment(input: PaymentInput!): Payment!
+    
+    # Traiter un paiement
+    processPayment(input: PaymentProcessInput!): Payment!
+    
+    # Annuler un paiement
+    cancelPayment(paymentCode: String!): Payment!
+}
